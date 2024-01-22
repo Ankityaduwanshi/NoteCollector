@@ -34,13 +34,14 @@ fun TextField(modifier: Modifier = Modifier,
               maxline:Int = 3,
               onvalueChange: (String)->Unit,
               lable : String ,
-              placeHolder: String){
+              placeHolder: String,
+              imeAction: ImeAction = ImeAction.Default,){
 
     TextField(value = textShow,
         onValueChange =onvalueChange,
         label = {Text(text = lable)},
         placeholder = { Text(text = placeHolder)},
-        keyboardOptions = KeyboardOptions().copy(imeAction = ImeAction.Done),
+        keyboardOptions = KeyboardOptions().copy(imeAction = imeAction),
         colors = TextFieldDefaults.colors(focusedContainerColor = Color.Transparent, unfocusedContainerColor = Color.Transparent),
         maxLines = maxline ,
         modifier = modifier

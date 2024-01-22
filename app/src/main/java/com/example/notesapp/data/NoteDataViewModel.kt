@@ -27,8 +27,7 @@ class NoteDataViewModel @Inject constructor(private val noteReposetory: NoteRepo
             noteReposetory.getNotes().distinctUntilChanged().collect { list ->
 
                 if (list.isEmpty()) {
-
-                    Log.d("Empty", "Empty List")
+                    pnotes.value= emptyList()
                 } else {
                     pnotes.value = list
                 }
