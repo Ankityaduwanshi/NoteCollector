@@ -1,10 +1,6 @@
-package com.example.notesapp
+package com.example.notesapp.activities
 
-
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -21,16 +17,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.notesapp.component.TextField
 import com.example.notesapp.component.TopBar
-import com.example.notesapp.data.Data
-import com.example.notesapp.data.DataColumn
+import com.example.notesapp.data.roomDataBase.Note
 
 
 @Composable
 
 fun NoteScreen(
-    noteList: List<Data>,
-    noteAdd: (Data) -> Unit,
-    removeNote: (Data) -> Unit
+    noteList: List<Note>,
+    noteAdd: (Note) -> Unit,
+    removeNote: (Note) -> Unit
 ) {
 
     var title by remember {
@@ -66,7 +61,7 @@ fun NoteScreen(
                 //save the data
 
                 if (description.isNotEmpty() && title.isNotEmpty()) {
-                    noteAdd(Data(title = title, description = description))
+                    noteAdd(Note(title = title, description = description))
                 }
 
                 //blank other field

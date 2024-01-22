@@ -1,21 +1,47 @@
 package com.example.notesapp.data
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.notesapp.data.roomDataBase.Note
+import com.example.notesapp.reposetory.NoteReposetory
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 // we can also use this view model but now i am not using its for only reference of upcoming application
+@HiltViewModel
+class NoteDataViewModel @Inject constructor(private val noteReposetory: NoteReposetory) :
+    ViewModel() {
+    private var pnotes = MutableStateFlow<List<Note>>(emptyList())
 
-class NoteDataViewModel : ViewModel(){
-    val note = mutableListOf<Data>()    //We use mutableListOf in place of val note = remember {mutableStateListOf<Data>() }
+    val notes = pnotes.asStateFlow()
 
-    fun NoteAdd(data:Data){
-        note.add(data)
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            noteReposetory.getNotes().distinctUntilChanged().collect { list ->
+
+                if (list.isEmpty()) {
+
+                    Log.d("Empty", "Empty List")
+                } else {
+                    pnotes.value = list
+                }
+
+            }
+        }
     }
 
 
-    fun removeNote(data: Data) {
-        note.remove(data)
-    }
+    fun noteAdd(note: Note) = viewModelScope.launch { noteReposetory.insert(note) }
 
+
+    fun removeNote(note: Note) = viewModelScope.launch { noteReposetory.delete(note) }
 
 
 }

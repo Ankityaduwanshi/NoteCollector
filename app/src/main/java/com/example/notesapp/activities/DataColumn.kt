@@ -1,4 +1,4 @@
-package com.example.notesapp.data
+package com.example.notesapp.activities
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -24,12 +24,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.notesapp.data.roomDataBase.Note
 import java.time.format.DateTimeFormatter
 
 @Composable
 
 
-fun DataColumn(noteList: List<Data>, removeNote: (Data) -> Unit) {
+fun DataColumn(noteList: List<Note>, removeNote: (Note) -> Unit) {
 
     LazyColumn(
         modifier = Modifier
@@ -49,7 +50,7 @@ fun DataColumn(noteList: List<Data>, removeNote: (Data) -> Unit) {
 
 
 @Composable
-private fun CardCreator(data: Data, removeNote: (Data) -> Unit) {
+private fun CardCreator(data: Note, removeNote: (Note) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()

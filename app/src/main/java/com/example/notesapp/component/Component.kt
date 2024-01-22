@@ -27,7 +27,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
-
+//Text field
 @Composable
 fun TextField(modifier: Modifier = Modifier,
               textShow: String,
