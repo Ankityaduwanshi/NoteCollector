@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-// we can also use this view model but now i am not using its for only reference of upcoming application
+
 @HiltViewModel
 class NoteDataViewModel @Inject constructor(private val noteReposetory: NoteReposetory) :
     ViewModel() {
